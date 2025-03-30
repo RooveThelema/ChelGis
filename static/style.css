@@ -1,0 +1,75 @@
+
+.limitations {
+    overflow: hidden; /* отключение прокрутки */
+    touch-action: none; /* блокировка жестов */
+    width: 100vw; 
+    height: 100vh;
+    z-index: -1; 
+}
+/*Главная страница*/
+
+/*Декор*/
+
+/* панель */
+.strokePanel{
+    background-color: rgb(67, 69, 201); /* цвет */
+    border: 0px; /* обводка */
+    border-radius: 18px; /* закругление */
+    position: absolute; /* позиция */
+    width: 375px; /* ширина */
+    height: 95px; /* высота */
+
+}
+/*Кнопки*/
+.iconButton{/*Общие характеристики внутреностей кнопок*/
+    width: 100%; /* ширина */
+    height: 100%; /* высота */
+    /*transform: translateY(500px) translateX(200px);  расположение  */
+    object-fit: contain; /*заполняем сохраняя пропорции*/
+}
+
+.iconButtonMap { /*Общие характеристики кнопок*/
+    background-color: transparent; /* цвет фона прозрачный */
+    width: 55px; /* ширина */
+    height: 55px; /* высота */
+    position: inherit;
+    border: 2px solid rgba(0, 0, 0, 0.5);; /* устанавливаем цвет обводке и её толщину*/
+    border-radius: 50%; /* закругление */
+  }
+
+/* цвет заполнения фона кнопок */
+.iconButtonMap:hover { 
+    background-color: rgb(44,200,139); 
+}
+
+/*панель*/
+.strokePanelMove { /* расположение полоски у кнопок */
+    transform: translateY(605px) translateX(-8px);
+}
+
+/* расположение кнопок */
+
+.iconRouteMove { /* расположение кнопки маршрута */
+    transform: translateY(618px) translateX(-45px);
+}
+
+.iconMapMove { /* расположение кнопки карты */
+    transform: translateY(618px) translateX(84px); 
+}
+
+.iconSearchMove{ /* расположение кнопки поиска */
+    transform: translateY(618px) translateX(36px);
+
+}
+
+.iconCarMove{ /* расположение кнопки машины */
+    transform: translateY(618px) translateX(48px);
+
+}
+
+.iconProfileMove{ /* расположение кнопки профиля */
+    transform: translateY(618px) translateX(58px);
+
+}
+
+/*None*/
