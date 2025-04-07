@@ -7,10 +7,10 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-#Test
-@app.route('/test')
+#Route
+@app.route('/route')
 def test():
-    return render_template('test.html')
+    return render_template('route.html')
 
 #Debug
 if __name__ == '__main__':

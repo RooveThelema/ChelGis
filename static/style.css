@@ -1,75 +1,98 @@
-
 .limitations {
     overflow: hidden; /* отключение прокрутки */
     touch-action: none; /* блокировка жестов */
-    width: 100vw; 
+    width: 100vw;
     height: 100vh;
-    z-index: -1; 
+    z-index: -1; /* Примечание: z-index: -1 для body может вызывать проблемы */
 }
-/*Главная страница*/
 
-/*Декор*/
+/* Главная страница */
+
+/* Декор */
 
 /* панель */
-.strokePanel{
+.strokePanel {
     background-color: rgb(67, 69, 201); /* цвет */
     border: 0px; /* обводка */
     border-radius: 18px; /* закругление */
     position: absolute; /* позиция */
     width: 375px; /* ширина */
     height: 95px; /* высота */
-
 }
-/*Кнопки*/
-.iconButton{/*Общие характеристики внутреностей кнопок*/
+
+/* Кнопки */
+.iconButton { /* Общие характеристики внутреностей кнопок */
     width: 100%; /* ширина */
     height: 100%; /* высота */
-    /*transform: translateY(500px) translateX(200px);  расположение  */
-    object-fit: contain; /*заполняем сохраняя пропорции*/
+    /* transform: translateY(500px) translateX(200px); расположение */
+    object-fit: contain; /* заполняем сохраняя пропорции */
+    display: block; /* Часто помогает убрать лишние отступы под img */
 }
 
-.iconButtonMap { /*Общие характеристики кнопок*/
+.iconButtonMap { /* Общие характеристики кнопок */
     background-color: transparent; /* цвет фона прозрачный */
     width: 55px; /* ширина */
     height: 55px; /* высота */
-    position: inherit;
-    border: 2px solid rgba(0, 0, 0, 0.5);; /* устанавливаем цвет обводке и её толщину*/
+    position: inherit; /* Примечание: 'inherit' здесь может вести себя как 'static', 'absolute' может быть более предсказуемо */
+    border: 2px solid rgba(0, 0, 0, 0.5); /* устанавливаем цвет обводке и её толщину */
     border-radius: 50%; /* закругление */
-  }
-
-/* цвет заполнения фона кнопок */
-.iconButtonMap:hover { 
-    background-color: rgb(44,200,139); 
+    padding: 0; /* Убираем внутренние отступы по умолчанию */
+    box-sizing: border-box; /* Чтобы border не влиял на размер */
+    cursor: pointer; /* Показываем, что элемент кликабельный */
 }
 
-/*панель*/
+/* цвет заполнения фона кнопок */
+.iconButtonMap:hover {
+    background-color: rgb(44, 200, 139);
+}
+
+/* панель */
 .strokePanelMove { /* расположение полоски у кнопок */
     transform: translateY(605px) translateX(-8px);
 }
 
-/* расположение кнопок */
-
+/* расположение кнопок карты */
 .iconRouteMove { /* расположение кнопки маршрута */
     transform: translateY(618px) translateX(-45px);
 }
 
 .iconMapMove { /* расположение кнопки карты */
-    transform: translateY(618px) translateX(84px); 
+    transform: translateY(618px) translateX(84px);
 }
 
-.iconSearchMove{ /* расположение кнопки поиска */
+.iconSearchMove { /* расположение кнопки поиска */
     transform: translateY(618px) translateX(36px);
-
 }
 
-.iconCarMove{ /* расположение кнопки машины */
+.iconCarMove { /* расположение кнопки машины */
     transform: translateY(618px) translateX(48px);
-
 }
 
-.iconProfileMove{ /* расположение кнопки профиля */
+.iconProfileMove { /* расположение кнопки профиля */
     transform: translateY(618px) translateX(58px);
-
 }
 
-/*None*/
+/* расположение кнопок маршрута */
+.iconRouteMoveRoute { /* расположение кнопки маршрута */
+    transform: translateY(618px) translateX(-45px);
+}
+
+.iconMapMoveRoute { /* расположение кнопки карты */
+    transform: translateY(618px) translateX(84px);
+}
+
+.iconSearchMoveRoute { /* расположение кнопки поиска */
+    transform: translateY(618px) translateX(36px);
+}
+
+.iconCarMoveRoute { /* расположение кнопки машины */
+    transform: translateY(618px) translateX(48px);
+}
+
+.iconProfileMoveRoute { /* расположение кнопки профиля */
+    transform: translateY(618px) translateX(58px);
+}
+
+.iconPlayOneMove {
+    transform: translateY(100px) translateX(-250px);
+}
