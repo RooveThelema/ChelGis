@@ -1,30 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Карта</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body class="limitations" style="background-color: rgb(166, 234, 234);">
+{% extends "base.html" %}
 
-    <button class="strokePanel strokePanelMove"></button>
+{% block title %}Карта{% endblock %}
 
-    <button class="iconButtonMap iconMapMove">
-        <img class="iconButton" src="/static/assets/Карта.svg" alt="Карта"> </button>
-
-    <a href="http://127.0.0.1:5500/templates/route.html">
-        <button class="iconButtonMap iconRouteMove">
-            <img class="iconButton" src="/static/assets/Маршрут.svg" alt="Маршруты"> </button>
-    </a>
-
-    <button class="iconButtonMap iconSearchMove">
-        <img class="iconButton" src="/static/assets/Поиск.svg" alt="Поиск"> </button>
-
-    <button class="iconButtonMap iconCarMove">
-        <img class="iconButton" src="/static/assets/Машина.svg" alt="Машина"> </button>
-
-    <button class="iconButtonMap iconProfileMove">
-        <img class="iconButton" src="/static/assets/Профиль.svg" alt="Профиль"> </button>
-
-</body>
-</html>
+{% block content %}
+{# Убираем display: none из базовых стилей, управление через JS #}
+<div id="map-tab" class="tab-content"> {# Этот div ДОЛЖЕН быть активен по умолчанию, если нет JS-переключения табов при загрузке #}
+    <div id="map-container">
+        <div id="map"></div> {# Сюда будет рендериться карта #}
+        {# Панель информации о маршруте (изначально скрыта JS или style="display: none;") #}
+        <div id="route-info" class="route-info" style="display: none;">
+            <h3>Информация о маршруте</h3>
+            <div class="transport-options">
+                <button class="transport-btn active" data-type="pedestrian">Пешком</button>
+                <button class="transport-btn" data-type="masstransit">Транспорт</button> {# Кнопка есть, но в JS пока не обрабатывается #}
+                <button class="transport-btn" data-type="auto">Авто</button>
+            </div>
+            <div id="route-details"></div>
+            <div id="route-instructions" class="route-instructions"></div>
+        </div>
+        {# Панель деталей точки (изначально скрыта JS или style="display: none;") #}
+        <div id="point-details" class="point-details" style="display: none;">
+            <button class="back-btn">← Назад</button> {# Текст кнопки можно поменять #}
+            <h3 id="point-title"></h3>
+            <p id="point-description"></p>
+            <button class="play-btn" id="navigate-to-point">Проложить маршрут сюда</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

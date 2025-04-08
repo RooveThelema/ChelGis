@@ -1,98 +1,347 @@
-.limitations {
-    overflow: hidden; /* отключение прокрутки */
-    touch-action: none; /* блокировка жестов */
-    width: 100vw;
+/* --- Цветовая схема обновлённая --- */
+:root {
+    --bg-dark: #1C1C1E;
+    --bg-dark-highlight: #2C2C2E;
+    --bg-light: #2A2A2D; /* Новый тёмный фон для контента */
+    --bg-white: #3A3A3C; /* Новый фон карточек/панелей */
+    --text-primary-on-dark: #FFFFFF;
+    --text-secondary-on-dark: #8E8E93;
+    --text-primary-on-light: #FFFFFF;
+    --text-secondary-on-light: #B0B0B0;
+    --accent-green: #34C759;
+    --separator-dark: #4A4A4C;
+    --separator-light: #5C5C5E;
+    --button-light-bg: #444447;
+    --button-light-text: #FFFFFF;
+}
+
+/* Оставляем базовые сбросы */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-primary-on-light);
     height: 100vh;
-    z-index: -1; /* Примечание: z-index: -1 для body может вызывать проблемы */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
-/* Главная страница */
-
-/* Декор */
-
-/* панель */
-.strokePanel {
-    background-color: rgb(67, 69, 201); /* цвет */
-    border: 0px; /* обводка */
-    border-radius: 18px; /* закругление */
-    position: absolute; /* позиция */
-    width: 375px; /* ширина */
-    height: 95px; /* высота */
+.header {
+    background-color: var(--bg-dark);
+    color: var(--text-primary-on-dark);
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--separator-dark);
 }
 
-/* Кнопки */
-.iconButton { /* Общие характеристики внутреностей кнопок */
-    width: 100%; /* ширина */
-    height: 100%; /* высота */
-    /* transform: translateY(500px) translateX(200px); расположение */
-    object-fit: contain; /* заполняем сохраняя пропорции */
-    display: block; /* Часто помогает убрать лишние отступы под img */
+.content {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: var(--bg-light);
 }
 
-.iconButtonMap { /* Общие характеристики кнопок */
-    background-color: transparent; /* цвет фона прозрачный */
-    width: 55px; /* ширина */
-    height: 55px; /* высота */
-    position: inherit; /* Примечание: 'inherit' здесь может вести себя как 'static', 'absolute' может быть более предсказуемо */
-    border: 2px solid rgba(0, 0, 0, 0.5); /* устанавливаем цвет обводке и её толщину */
-    border-radius: 50%; /* закругление */
-    padding: 0; /* Убираем внутренние отступы по умолчанию */
-    box-sizing: border-box; /* Чтобы border не влиял на размер */
-    cursor: pointer; /* Показываем, что элемент кликабельный */
+.tab-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
-/* цвет заполнения фона кнопок */
-.iconButtonMap:hover {
-    background-color: rgb(44, 200, 139);
+/* --- Нижняя навигация --- */
+.tabs {
+    display: flex;
+    background-color: var(--bg-dark);
+    flex-shrink: 0;
+    z-index: 20;
+    position: relative;
+    border-top: 1px solid var(--separator-dark);
 }
 
-/* панель */
-.strokePanelMove { /* расположение полоски у кнопок */
-    transform: translateY(605px) translateX(-8px);
+.tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 10px;  /* Увеличиваем отступы для кнопок */
+    cursor: pointer;
+    color: var(--text-secondary-on-dark);
+    font-size: 14px;  /* Увеличиваем размер шрифта */
+    text-decoration: none;
+    text-align: center;
+    border-right: 1px solid var(--separator-dark);
+    transition: background-color 0.1s ease-in-out, color 0.2s ease;
+    background-color: transparent;
+}
+.tab:last-child {
+    border-right: none;
+}
+.tab span {
+    margin-top: 2px;
+}
+.tab:hover {
+    color: var(--accent-green);
+    background-color: rgba(52, 199, 89, 0.08);
+}
+.tab.active {
+    color: var(--accent-green);
+    background-color: var(--bg-dark-highlight);
+}
+.tab.active:hover {
+    background-color: var(--bg-dark-highlight);
 }
 
-/* расположение кнопок карты */
-.iconRouteMove { /* расположение кнопки маршрута */
-    transform: translateY(618px) translateX(-45px);
+/* --- Стили вкладок с контентом --- */
+#routes-tab, #car-tab, #search-tab, #profile-tab {
+    overflow-y: auto;
+    background-color: var(--bg-light);
 }
 
-.iconMapMove { /* расположение кнопки карты */
-    transform: translateY(618px) translateX(84px);
+/* --- Карточки маршрутов --- */
+.route-card {
+    background-color: var(--bg-white);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px;
+    border: 1px solid var(--separator-light);
+    flex-shrink: 0;
+}
+.route-card h3 {
+    margin-bottom: 8px;
+    color: var(--text-primary-on-light);
+    font-size: 1.1em;
+}
+.route-card p {
+    margin-bottom: 15px;
+    color: var(--text-secondary-on-light);
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+.route-card p i {
+    color: var(--text-secondary-on-light);
+    font-size: 0.9em;
 }
 
-.iconSearchMove { /* расположение кнопки поиска */
-    transform: translateY(618px) translateX(36px);
+/* --- Кнопки (увеличенные и обновлённые) --- */
+.play-btn, .transport-btn, .back-btn, .search-container button {
+    background-color: var(--button-light-bg);
+    color: var(--button-light-text);
+    border: none;
+    padding: 18px 25px;  /* Увеличиваем кнопки */
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1em;  /* Увеличиваем шрифт */
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+.play-btn:hover,
+.transport-btn:hover,
+.back-btn:hover,
+.search-container button:hover {
+    background-color: rgba(52, 199, 89, 0.1);
+    color: var(--accent-green);
+}
+.play-btn:active,
+.transport-btn:active,
+.back-btn:active,
+.search-container button:active {
+    transform: scale(0.97);
 }
 
-.iconCarMove { /* расположение кнопки машины */
-    transform: translateY(618px) translateX(48px);
+/* Активное состояние транспортных кнопок */
+.transport-btn.active {
+    background-color: var(--accent-green);
+    color: var(--text-primary-on-dark);
 }
 
-.iconProfileMove { /* расположение кнопки профиля */
-    transform: translateY(618px) translateX(58px);
+/* Поисковый ввод */
+.search-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--separator-light);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: #2C2C2E;
+    color: var(--text-primary-on-light);
+    font-size: 1em;
+}
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent-green);
+    background-color: var(--bg-white);
 }
 
-/* расположение кнопок маршрута */
-.iconRouteMoveRoute { /* расположение кнопки маршрута */
-    transform: translateY(618px) translateX(-45px);
+/* Заглушки */
+.placeholder {
+    background-color: var(--bg-white);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin: 15px;
+    border: 1px solid var(--separator-light);
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary-on-light);
 }
 
-.iconMapMoveRoute { /* расположение кнопки карты */
-    transform: translateY(618px) translateX(84px);
+/* Карта и панели поверх */
+#map-tab {
+    overflow: hidden;
+}
+#map-container {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+#map {
+    width: 100%;
+    flex-grow: 1;
 }
 
-.iconSearchMoveRoute { /* расположение кнопки поиска */
-    transform: translateY(618px) translateX(36px);
+.route-info, .point-details {
+    width: 100%;
+    flex-shrink: 0;
+    z-index: 10;
+    padding: 15px;
+    background: var(--bg-white);
+    border-top: 1px solid var(--separator-light);
+    max-height: 45vh;
+    overflow-y: auto;
+    color: var(--text-primary-on-light);
 }
 
-.iconCarMoveRoute { /* расположение кнопки машины */
-    transform: translateY(618px) translateX(48px);
+/* Инструкции маршрута */
+.route-instructions h4 {
+    margin-bottom: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--text-primary-on-light);
+}
+.instruction-step {
+    margin-bottom: 8px;
+    padding-left: 18px;
+    position: relative;
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: var(--text-primary-on-light);
+}
+.instruction-step:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-size: 1.3em;
+    top: 0px;
 }
 
-.iconProfileMoveRoute { /* расположение кнопки профиля */
-    transform: translateY(618px) translateX(58px);
+/* Результаты поиска */
+.search-result-item {
+    background-color: var(--bg-white);
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--separator-light);
+    cursor: pointer;
+}
+.search-result-item:first-child {
+    border-top: 1px solid var(--separator-light);
+}
+.search-result-item strong {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--text-primary-on-light);
+    font-weight: 500;
+}
+.search-result-item small {
+    color: var(--text-secondary-on-light);
+    font-size: 0.9em;
+}
+.search-result-item:hover {
+    background-color: rgba(255,255,255,0.05);
 }
 
-.iconPlayOneMove {
-    transform: translateY(100px) translateX(-250px);
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary-on-light);
+    font-style: italic;
+}
+
+/* --- Вкладка "Я" --- */
+#profile-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#profile-tab .avatar-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: var(--bg-white);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 2px solid var(--separator-light);
+}
+
+#profile-tab .avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#profile-tab .profile-description {
+    width: 100%;
+    background-color: var(--bg-white);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--separator-light);
+    text-align: center;
+    color: var(--text-primary-on-light);
+}
+
+#profile-tab .profile-description p {
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+#profile-tab .upload-buttons button {
+    background-color: var(--accent-green);
+    color: var(--text-primary-on-dark);
+    padding: 12px 18px;
+    border-radius: 10px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+}
+
+#profile-tab .upload-buttons button:hover {
+    background-color: rgba(52, 199, 89, 0.15);
 }

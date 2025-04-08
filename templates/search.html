@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Поиск{% endblock %}
+
+{% block content %}
+<div id="search-tab" class="tab-content">
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Введите название места или маршрута" id="search-input">
+        {# Кнопка "Найти" #}
+        <button class="search-btn" id="search-btn">Найти</button>
+
+        {# Кнопка "Фильтр" - используем тот же класс для единого стиля #}
+        <button class="search-btn" id="filter-toggle-btn">Фильтр маршрутов</button>
+
+        {# Скрытый блок с опциями фильтра #}
+        <div id="filter-options" class="filter-options" style="display: none;">
+            <label>
+                <input type="checkbox" name="route-type" value="pedestrian" checked> Пешком
+            </label>
+            <label>
+                <input type="checkbox" name="route-type" value="car" checked> На машине
+            </label>
+        </div>
+    </div>
+    <div class="search-results" id="search-results">
+        {# Результаты поиска / подсказки маршрутов #}
+    </div>
+</div>
+{# Передаем все маршруты в JS для фильтрации на клиенте #}
+<script id="all-routes-data-script" type="application/json">
+    {{ all_routes | tojson }}
+</script>
+{% endblock %}

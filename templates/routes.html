@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Пешие Маршруты{% endblock %}
+
+{% block content %}
+<div id="routes-tab" class="tab-content">
+    {# Используем переменную routes, переданную из Flask #}
+    {% if routes %}
+        {% for route_id, route_data in routes.items() %}
+        <div class="route-card">
+            <h3>{{ route_data.name }}</h3>
+            {# Добавляем описание типа маршрута #}
+            <p>{{ route_data.description }}<br><i>{{ route_data.full_description }}</i></p>
+            {# Кнопка теперь использует route_id #}
+            <button class="play-btn build-route-btn" data-route-id="{{ route_id }}">Построить маршрут</button>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="padding: 15px; text-align: center;">Нет доступных пеших маршрутов.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>ChelGis - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {# Фавиконки и прочее можно добавить сюда #}
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=05278cfe-03c4-4301-8337-f77e94a72484&lang=ru_RU" type="text/javascript"></script>
+</head>
+<body>
+    {# Шапка с темным фоном и белым текстом #}
+    <div class="header">ChelGis</div>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {# Нижняя панель навигации с новыми названиями и структурой #}
+    <div class="tabs">
+        {# Каждый таб теперь содержит ссылку напрямую #}
+        <a href="{{ url_for('home') }}" class="tab {% if active_page == 'home' %}active{% endif %}">
+            {# Тут можно будет добавить иконку перед span #}
+            <span>Главная</span>
+        </a>
+        <a href="{{ url_for('show_routes') }}" class="tab {% if active_page == 'routes' %}active{% endif %}">
+            <span>Пешком</span>
+        </a>
+        <a href="{{ url_for('search') }}" class="tab {% if active_page == 'search' %}active{% endif %}">
+            <span>Поиск</span>
+        </a>
+        <a href="{{ url_for('on_car') }}" class="tab {% if active_page == 'on_car' %}active{% endif %}">
+            <span>На авто</span>
+        </a>
+        <a href="{{ url_for('profile') }}" class="tab {% if active_page == 'profile' %}active{% endif %}">
+            <span>Я</span>
+        </a>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
